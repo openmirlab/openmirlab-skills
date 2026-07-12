@@ -26,13 +26,10 @@ someone at a repo they can't reach isn't a real recommendation.
 | Separate vocals with SOTA community models | `bs-roformer-infer` / `melband-roformer-infer` | `pip install bs-roformer-infer` · `pip install melband-roformer-infer` | Multiple registry models per package (vocals/instrumental/dereverb variants) — see each README's model table |
 | Separate a mix with an alternative multi-stem / drum-focused model | `mdxnet-infer` | `pip install git+https://github.com/openmirlab/mdxnet-infer` | Public GitHub, not yet on PyPI. MDX23C TFC-TDF, includes a DrumSep checkpoint |
 | Transcribe music to MIDI (multi-instrument) | `mt3-infer` | `pip install mt3-infer` | Wraps 3 independent MT3 ports (MR-MT3/MT3-PyTorch/YourMT3) behind one API — see README for which backend fits |
-| Transcribe piano specifically, with pedal detection | `hr-piano-transcribe-infer` | `pip install git+https://github.com/openmirlab/hr-piano-transcribe-infer` | Public GitHub, not yet on PyPI. Higher-resolution than mt3-infer's piano output; auto-downloads a ~165MB checkpoint |
 | Transcribe to lead sheet (melody + chords) | `sheetsage-infer` | `pip install sheetsage-infer` | Now installs cleanly via plain pip (`madmom-infer>=0.1.0` replaced the old git dep) |
 | Recognize chords (large vocabulary) | `lv-chordia` | `pip install lv-chordia` | Bundles its own ~28MB weight ensemble in the wheel (documented size-based exception — no separate download step) |
 | Tag/classify music audio (genre/mood/instruments) | `maest-infer` | `pip install maest-infer` | AGPL-3.0 — check license fit |
-| Extract a clean one-shot drum sample from a mix | `dose-infer` | `pip install git+https://github.com/openmirlab/dose-infer` | Public GitHub, not yet on PyPI. DAC + Transformer, auto-downloads ~5.4GB of weights |
 | Synthesize guitar audio from control signals (DDSP) | `ddsp-guitar-infer` | `pip install git+https://github.com/openmirlab/ddsp-guitar-infer` | Public GitHub, not yet on PyPI. String-wise DDSP synth |
-| Apply neural-codec-based audio effects / granular resynthesis | `latenteffect` | `pip install git+https://github.com/openmirlab/latenteffect` | Public GitHub, not yet on PyPI. Codec-agnostic (DAC shipped; EnCodec adapter not yet built) |
 | Generate audio continuations (research) | `jukebox-infer` | `pip install jukebox-infer` | Large checkpoints (~6.2GB); 5b/5b_lyrics model sizes are present but unused/untested internally — stick to the default unless you've verified them yourself |
 
 ## Ground rules for helping users

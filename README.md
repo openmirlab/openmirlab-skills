@@ -33,13 +33,10 @@ their release lands.
 | SOTA vocal separation | [bs-roformer-infer](https://github.com/openmirlab/bs-roformer-infer) · [melband-roformer-infer](https://github.com/openmirlab/melband-roformer-infer) | PyPI |
 | Alternative multi-stem / drum-stem separation | [mdxnet-infer](https://github.com/openmirlab/mdxnet-infer) | GitHub |
 | Music → MIDI transcription (multi-instrument) | [mt3-infer](https://github.com/openmirlab/mt3-infer) | PyPI |
-| High-resolution piano transcription (with pedal) | [hr-piano-transcribe-infer](https://github.com/openmirlab/hr-piano-transcribe-infer) | GitHub |
 | Music → lead sheet | [sheetsage-infer](https://github.com/openmirlab/sheetsage-infer) | PyPI |
 | Chord recognition | [lv-chordia](https://github.com/openmirlab/lv-chordia) | PyPI |
 | Audio tagging/classification | [maest-infer](https://github.com/openmirlab/maest-infer) | PyPI |
-| Drum one-shot sample extraction | [dose-infer](https://github.com/openmirlab/dose-infer) | GitHub |
 | Guitar synthesis (DDSP) | [ddsp-guitar-infer](https://github.com/openmirlab/ddsp-guitar-infer) | GitHub |
-| Neural-codec audio effects / granular resynthesis | [latenteffect](https://github.com/openmirlab/latenteffect) | GitHub |
 | Audio generation (research) | [jukebox-infer](https://github.com/openmirlab/jukebox-infer) | PyPI |
 
 See [LANDSCAPE.md](./LANDSCAPE.md) for tools outside the openmirlab
