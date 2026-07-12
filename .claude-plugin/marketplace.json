@@ -1,0 +1,15 @@
+{
+  "name": "openmirlab-skills",
+  "owner": {
+    "name": "openmirlab",
+    "url": "https://github.com/openmirlab"
+  },
+  "plugins": [
+    {
+      "name": "mir",
+      "source": "./plugins/mir",
+      "description": "Guide to the openmirlab music-AI toolbox. CLAUDE.md is a capability map routing music/audio tasks (source separation, structure analysis, transcription, chords, tagging) to the right openmirlab package with known-good install commands and license flags; /mir:use walks you from task to working output, grounded in each repo's current README rather than memory. Install this one to USE the tools.",
+      "version": "0.1.0"
+    }
+  ]
+}
