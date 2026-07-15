@@ -20,7 +20,7 @@ someone at a repo they can't reach isn't a real recommendation.
 
 | You want to… | Package | Install | Notes |
 |---|---|---|---|
-| Analyze song structure (tempo/BPM, beats, downbeats, segments like verse/chorus) | `all-in-one-infer` | `pip install all-in-one-infer` | Includes built-in source separation (demucs-infer) and beat tracking (madmom-infer, plain PyPI dep now — the old git-madmom workaround is gone); GPU recommended, CPU/macOS work |
+| Analyze song structure (tempo/BPM, beats, downbeats, segments like verse/chorus) | `all-in-one-infer` | `pip install all-in-one-infer` | Includes built-in source separation (demucs-infer) and beat tracking (madmom-infer); use `AllInOneSession` for reusable load/infer/release lifecycle, while `analyze()` remains the lazy one-shot API |
 | Beat/downbeat/onset DSP primitives (modernized madmom) | `madmom-infer` | `pip install madmom-infer` | Published. numpy backend is the bit-identical-verified reference; optional differentiable torch frontend via `madmom-infer[torch]`. Use `MadmomAnalyzer` for reusable `load`/`infer`/`release` lifecycle; checkpoint metadata is package-owned. |
 | Separate a song into stems (vocals/drums/bass/other) | `demucs-infer` | `pip install demucs-infer` | The general-purpose workhorse (HTDemucs). `DemucsSession` provides explicit reusable lifecycle and package-owned checkpoint metadata. |
 | Separate vocals with SOTA community models | `bs-roformer-infer` / `melband-roformer-infer` | `pip install bs-roformer-infer` · `pip install melband-roformer-infer` | Multiple registry models per package (vocals/instrumental/dereverb variants) — see each README's model table |
