@@ -54,6 +54,14 @@ the original. Model weights are never bundled — they download at first
 use, and some carry their own (occasionally non-commercial) licenses; the
 capability map flags these.
 
+## Runtime and checkpoint convention
+
+The inference packages expose independent, reusable model sessions: callers
+can explicitly load, infer, release, and inspect status/cache state without a
+shared runtime dependency. Each package owns its release-pinned checkpoint
+configuration (including URLs and SHA-256 digests) in its installed package;
+this plugin is a routing aid, not the runtime source of checkpoint truth.
+
 ## License
 
 MIT. Model weights are never bundled by any openmirlab package.

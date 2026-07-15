@@ -6,7 +6,7 @@ right package, but ground truth lives in each repo's own README — read those
 at answer time, never answer from this file alone. Entries reflect the state
 at the last-verified date below; treat older claims as hints to re-check.
 
-Last verified: 2026-07-12 (24-repo README/CLAUDE.md sweep; confirmed publish
+Last verified: 2026-07-15 (24-repo README/CLAUDE.md sweep; confirmed publish
 status per-repo via each README's own PyPI badge / private-track notice,
 not from memory).
 
@@ -21,10 +21,10 @@ someone at a repo they can't reach isn't a real recommendation.
 | You want to… | Package | Install | Notes |
 |---|---|---|---|
 | Analyze song structure (tempo/BPM, beats, downbeats, segments like verse/chorus) | `all-in-one-infer` | `pip install all-in-one-infer` | Includes built-in source separation (demucs-infer) and beat tracking (madmom-infer, plain PyPI dep now — the old git-madmom workaround is gone); GPU recommended, CPU/macOS work |
-| Beat/downbeat/onset DSP primitives (modernized madmom) | `madmom-infer` | `pip install madmom-infer` | Published. numpy backend is the bit-identical-verified reference; optional differentiable torch frontend via `madmom-infer[torch]` |
-| Separate a song into stems (vocals/drums/bass/other) | `demucs-infer` | `pip install demucs-infer` | The general-purpose workhorse (HTDemucs) |
+| Beat/downbeat/onset DSP primitives (modernized madmom) | `madmom-infer` | `pip install madmom-infer` | Published. numpy backend is the bit-identical-verified reference; optional differentiable torch frontend via `madmom-infer[torch]`. Use `MadmomAnalyzer` for reusable `load`/`infer`/`release` lifecycle; checkpoint metadata is package-owned. |
+| Separate a song into stems (vocals/drums/bass/other) | `demucs-infer` | `pip install demucs-infer` | The general-purpose workhorse (HTDemucs). `DemucsSession` provides explicit reusable lifecycle and package-owned checkpoint metadata. |
 | Separate vocals with SOTA community models | `bs-roformer-infer` / `melband-roformer-infer` | `pip install bs-roformer-infer` · `pip install melband-roformer-infer` | Multiple registry models per package (vocals/instrumental/dereverb variants) — see each README's model table |
-| Separate a mix with an alternative multi-stem / drum-focused model | `mdxnet-infer` | `pip install git+https://github.com/openmirlab/mdxnet-infer` | Public GitHub, not yet on PyPI. MDX23C TFC-TDF, includes a DrumSep checkpoint |
+| Separate a mix with an alternative multi-stem / drum-focused model | `mdxnet-infer` | `pip install git+https://github.com/openmirlab/mdxnet-infer` | Public GitHub, not yet on PyPI. MDX23C TFC-TDF, includes a DrumSep checkpoint. `MDXNetSession` owns explicit lifecycle and package-local checkpoint metadata. |
 | Transcribe music to MIDI (multi-instrument) | `mt3-infer` | `pip install mt3-infer` | Wraps 3 independent MT3 ports (MR-MT3/MT3-PyTorch/YourMT3) behind one API — see README for which backend fits |
 | Transcribe to lead sheet (melody + chords) | `sheetsage-infer` | `pip install sheetsage-infer` | Now installs cleanly via plain pip (`madmom-infer>=0.1.0` replaced the old git dep) |
 | Recognize chords (large vocabulary) | `lv-chordia` | `pip install lv-chordia` | Bundles its own ~28MB weight ensemble in the wheel (documented size-based exception — no separate download step) |
@@ -36,6 +36,14 @@ someone at a repo they can't reach isn't a real recommendation.
 
 - **Weights download at first use** (never bundled): first run needs network +
   disk; cache locations and model choices live in each repo's README.
+- **Independent lifecycle:** the inference packages own their model session,
+  cache, checkpoint verification, and release; callers may wrap them in a
+  higher-level manager without a shared runtime dependency. Read the package
+  README for the exact session class and override parameters.
+- **Package-owned checkpoint source:** each package reads its release-pinned
+  checkpoint metadata from its own config file. The skills router is guidance,
+  not a live checkpoint catalog; verify URLs and digests against the package
+  at answer time.
 - **License layering**: package code is permissive, but some model WEIGHTS
   carry non-commercial licenses. If the user hints at commercial use, check
   the specific model's weights license before recommending.
