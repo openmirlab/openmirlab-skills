@@ -26,11 +26,11 @@ someone at a repo they can't reach isn't a real recommendation.
 | Separate vocals with SOTA community models | `bs-roformer-infer` / `melband-roformer-infer` | `pip install bs-roformer-infer` · `pip install melband-roformer-infer` | Multiple registry models per package (vocals/instrumental/dereverb variants) — see each README's model table |
 | Separate a mix with an alternative multi-stem / drum-focused model | `mdxnet-infer` | `pip install git+https://github.com/openmirlab/mdxnet-infer` | Public GitHub, not yet on PyPI. MDX23C TFC-TDF, includes a DrumSep checkpoint. `MDXNetSession` owns explicit lifecycle and package-local checkpoint metadata. |
 | Transcribe music to MIDI (multi-instrument) | `mt3-infer` | `pip install mt3-infer` | Wraps 3 independent MT3 ports (MR-MT3/MT3-PyTorch/YourMT3) behind one API — see README for which backend fits |
-| Transcribe to lead sheet (melody + chords) | `sheetsage-infer` | `pip install sheetsage-infer` | Now installs cleanly via plain pip (`madmom-infer>=0.1.0` replaced the old git dep) |
+| Transcribe to lead sheet (melody + chords) | `sheetsage-infer` | `pip install sheetsage-infer` | `SheetSageSession` provides explicit load/infer/release lifecycle; `sheetsage()` remains the lazy one-shot API |
 | Recognize chords (large vocabulary) | `lv-chordia` | `pip install lv-chordia` | Bundles its own ~28MB weight ensemble in the wheel (documented size-based exception — no separate download step) |
 | Tag/classify music audio (genre/mood/instruments) | `maest-infer` | `pip install maest-infer` | AGPL-3.0 — check license fit |
 | Synthesize guitar audio from control signals (DDSP) | `ddsp-guitar-infer` | `pip install git+https://github.com/openmirlab/ddsp-guitar-infer` | Public GitHub, not yet on PyPI. String-wise DDSP synth |
-| Generate audio continuations (research) | `jukebox-infer` | `pip install jukebox-infer` | Large checkpoints (~6.2GB); 5b/5b_lyrics model sizes are present but unused/untested internally — stick to the default unless you've verified them yourself |
+| Generate audio continuations (research) | `jukebox-infer` | `pip install jukebox-infer` | `JukeboxSession` provides explicit load/infer/release lifecycle; large checkpoints (~6.2GB) remain lazy and package-owned |
 
 ## Ground rules for helping users
 
