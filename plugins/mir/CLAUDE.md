@@ -6,9 +6,9 @@ right package, but ground truth lives in each repo's own README — read those
 at answer time, never answer from this file alone. Entries reflect the state
 at the last-verified date below; treat older claims as hints to re-check.
 
-Last verified: 2026-07-31 (pcunwa RoFormer inventory refresh; other
-package publish status remains from the 2026-07-15 README/CLAUDE.md sweep,
-confirmed per-repo rather than from memory).
+Last verified: 2026-09-15 for madmom-infer's internal v0.3.0 tag; the pcunwa
+RoFormer inventory was refreshed 2026-07-31, and other package publish status
+remains from the 2026-07-15 README/CLAUDE.md sweep.
 
 ## Capability map
 
@@ -21,7 +21,7 @@ someone at a repo they can't reach isn't a real recommendation.
 | You want to… | Package | Install | Notes |
 |---|---|---|---|
 | Analyze song structure (tempo/BPM, beats, downbeats, segments like verse/chorus) | `all-in-one-infer` | `pip install all-in-one-infer` | Includes built-in source separation (demucs-infer) and beat tracking (madmom-infer); `AllInOneSession` reuses Harmonix plus a lazy session-owned HTDemucs separator for mixed input, while `analyze()` remains the lazy one-shot API and direct stems input never loads Demucs |
-| Beat/downbeat/onset DSP primitives (modernized madmom) | `madmom-infer` | `pip install madmom-infer` | Published. numpy backend is the bit-identical-verified reference; optional differentiable torch frontend via `madmom-infer[torch]`. Use `MadmomAnalyzer` for reusable `load`/`infer`/`release` lifecycle; checkpoint metadata is package-owned. |
+| Beat/downbeat/onset DSP primitives (modernized madmom) | `madmom-infer` | `pip install madmom-infer` | PyPI remains at 0.2.0. Internal deployments use Git tag `v0.3.0`; install `"madmom-infer[numba] @ git+https://github.com/openmirlab/madmom-infer@v0.3.0"` for exact compiled Viterbi, or add `[torch]` for the optional neural frontend. Use `MadmomAnalyzer` for reusable lifecycle; checkpoint metadata is package-owned. |
 | Separate a song into music, vocal/instrumental, cinematic, or drum-kit stems | `demucs-infer` | `pip install demucs-infer` | The general-purpose HTDemucs workhorse plus registry choices for UVR (`vocals`/`non_vocals`), CDX23 (`music`/`sfx`/`speech`), MSST vocals, and DrumSep. `DemucsSession` provides explicit reusable lifecycle and package-owned checkpoint metadata; use the package README for exact model names and weight licenses. |
 | Separate vocals with SOTA community models | `bs-roformer-infer` / `melband-roformer-infer` | `pip install bs-roformer-infer` · `pip install melband-roformer-infer` | BS covers 16 direct `pcunwa` checkpoints across standard/Xe, Siamese, HyperACE v1/v2, FNO, Large-Inst, Resurrection, Revive, and Value Residual; MelBand covers 20 direct `pcunwa` checkpoints across Big, Small, Instrumental, Kim FT, and InstVoc Duality families. Read each README for exact names and the unresolved weight-license gate. |
 | Separate a mix with an alternative multi-stem / drum-focused model | `mdxnet-infer` | `pip install git+https://github.com/openmirlab/mdxnet-infer` | Public GitHub, not yet on PyPI. MDX23C TFC-TDF registry: DrumSep, vocals/instrumental, dereverb, 4-stem, and SFX recipes. `MDXNetSession` owns explicit lifecycle and package-local checkpoint metadata; see its README for names and license caveats. |
