@@ -3,8 +3,8 @@
 A [Claude Code](https://claude.com/claude-code) plugin for the
 [openmirlab](https://github.com/openmirlab) music-AI toolbox — source
 separation, song-structure analysis, music transcription, chord
-recognition, and audio tagging, all as modern, inference-only,
-pip-installable packages.
+recognition, audio tagging, and time/pitch processing. The toolbox includes
+inference-only model packages and native audio tools.
 
 ## Install
 
@@ -27,6 +27,7 @@ their release lands.
 
 | Task | Package | Status |
 |---|---|---|
+| Time stretching, pitch shifting, marker-based warp | [pytimestretch](https://github.com/openmirlab/pytimestretch) | GitHub; GPL-2.0-or-later; source build needs a C++17 toolchain |
 | Song structure (BPM, beats, downbeats, segments) | [all-in-one-infer](https://github.com/openmirlab/all-in-one-infer) | PyPI |
 | Beat/downbeat/onset DSP primitives (modernized madmom) | [madmom-infer](https://github.com/openmirlab/madmom-infer) | PyPI |
 | Source separation (vocals/drums/bass/other) | [demucs-infer](https://github.com/openmirlab/demucs-infer) | PyPI |
@@ -46,13 +47,18 @@ libraries, evaluation frameworks, and more as the list grows).
 ## Why these packages exist
 
 Upstream MIR research code goes stale fast — abandoned repos, compiled
-extensions that stop building, PyPI releases years behind. Every package
-here is a modernized, inference-only, pip-installable rebuild: no training
+extensions that stop building, PyPI releases years behind. The inference
+packages are modernized, inference-only, pip-installable rebuilds: no training
 code, no compiled dependencies in the core install, no git-URL
 dependencies, and refactors are held to a bit-identical-output bar against
 the original. Model weights are never bundled — they download at first
 use, and some carry their own (occasionally non-commercial) licenses; the
 capability map flags these.
+
+pytimestretch is a native audio-tool package: it binds the maintained Rubber
+Band and Signalsmith engines directly and intentionally compiles them into its
+wheels. It has no model weights or inference session. Read its README for the
+source-build requirements and development wheel artifacts; it is not on PyPI.
 
 ## Runtime and checkpoint convention
 
