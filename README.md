@@ -23,7 +23,9 @@ output on your own file.
 Packages marked **PyPI** install with a plain `pip install <name>`. Packages
 marked **GitHub** are public but not yet PyPI-published — install straight
 from the repo (`pip install git+https://github.com/openmirlab/<name>`) until
-their release lands.
+their release lands. For pytimestretch, follow its [uv installation
+guide](https://github.com/openmirlab/pytimestretch#install), including native
+source-build requirements or the matching Actions wheel.
 
 | Task | Package | Status |
 |---|---|---|
@@ -58,7 +60,7 @@ capability map flags these.
 pytimestretch is a native audio-tool package: it binds the maintained Rubber
 Band and Signalsmith engines directly and intentionally compiles them into its
 wheels. It has no model weights or inference session. Read its README for the
-source-build requirements and development wheel artifacts; it is not on PyPI.
+uv source-build workflow and development wheel artifacts; it is not on PyPI.
 
 ## Runtime and checkpoint convention
 
