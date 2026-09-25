@@ -9,7 +9,7 @@ at the last-verified date below; treat older claims as hints to re-check.
 Last verified: 2026-09-15 for madmom-infer's internal v0.3.0 tag; the pcunwa
 RoFormer inventory was refreshed 2026-07-31, and other package publish status
 remains from the 2026-07-15 README/CLAUDE.md sweep. pytimestretch's public-source
-entry was added on 2026-09-24; it has no PyPI release.
+entry was updated for `time_scrub` on 2026-09-25; it has no PyPI release.
 
 ## Capability map
 
@@ -22,6 +22,7 @@ someone at a repo they can't reach isn't a real recommendation.
 | You want to… | Package | Install | Notes |
 |---|---|---|---|
 | Stretch duration, shift pitch, or warp audio to frame markers | `pytimestretch` | uv source install or Actions wheel; follow its README | Public GitHub, not on PyPI. GPL-2.0-only combined distribution; direct Rubber Band/Signalsmith bindings, C++20 toolchain needed for source builds. NumPy frame-major arrays; `duration_ratio` is output/input, the inverse of librosa/pyrubberband `rate`. These operations return exact frame counts. No inference lifecycle or weights. |
+| Hold or reverse a source playhead while output time continues | `pytimestretch.time_scrub` | uv source install or Actions wheel; follow its README | Separate Bungee Basic binding, not a `time_stretch` backend. `(output_frame, source_frame)` control points may hold or reverse the source; output length is exact. Mono/stereo NumPy audio at 8–192 kHz; optional global pitch within ±24 semitones, no formant preservation. Dense transients and stationary grains have documented artifacts. GPL-2.0-only combined distribution. |
 | Make long, smeared spectral textures or compress with PaulStretch's sound | `pytimestretch.extreme_stretch` | uv source install or Actions wheel; follow its README | Direct libpaulstretch binding, separate from the precise backends. Mono/stereo NumPy audio needs at least 81,920 frames; `duration_ratio >= 1e-5` is passed through unchanged, and values below 1 shorten audio. Output length is approximate and spectral phase changes across calls. Combined distribution is GPL-2.0-only. |
 | Analyze song structure (tempo/BPM, beats, downbeats, segments like verse/chorus) | `all-in-one-infer` | `pip install all-in-one-infer` | Includes built-in source separation (demucs-infer) and beat tracking (madmom-infer); `AllInOneSession` reuses Harmonix plus a lazy session-owned HTDemucs separator for mixed input, while `analyze()` remains the lazy one-shot API and direct stems input never loads Demucs |
 | Beat/downbeat/onset DSP primitives (modernized madmom) | `madmom-infer` | `pip install madmom-infer` | PyPI remains at 0.2.0. Internal deployments use Git tag `v0.3.0`; install `"madmom-infer[numba] @ git+https://github.com/openmirlab/madmom-infer@v0.3.0"` for exact compiled Viterbi, or add `[torch]` for the optional neural frontend. Use `MadmomAnalyzer` for reusable lifecycle; checkpoint metadata is package-owned. |

@@ -29,7 +29,7 @@ source-build requirements or the matching Actions wheel.
 
 | Task | Package | Status |
 |---|---|---|
-| Time stretching, pitch shifting, marker-based warp, PaulStretch spectral stretch/compression | [pytimestretch](https://github.com/openmirlab/pytimestretch) | GitHub; GPL-2.0-only; source build needs a C++20 toolchain |
+| Time stretching, pitch shifting, forward-only marker warp, Bungee Basic hold/reverse scrubbing, PaulStretch spectral stretch/compression | [pytimestretch](https://github.com/openmirlab/pytimestretch) | GitHub; GPL-2.0-only; source build needs a C++20 toolchain |
 | Song structure (BPM, beats, downbeats, segments) | [all-in-one-infer](https://github.com/openmirlab/all-in-one-infer) | PyPI |
 | Beat/downbeat/onset DSP primitives (modernized madmom) | [madmom-infer](https://github.com/openmirlab/madmom-infer) | PyPI |
 | Source separation (vocals/drums/bass/other) | [demucs-infer](https://github.com/openmirlab/demucs-infer) | PyPI |
@@ -58,11 +58,12 @@ use, and some carry their own (occasionally non-commercial) licenses; the
 capability map flags these.
 
 pytimestretch is a native audio-tool package: it binds Rubber Band and
-Signalsmith for precise duration and pitch work, and libpaulstretch for a
-separate spectral stretch/compression effect with approximate output length.
-It compiles all three engines into its wheels. It has no model weights or
-inference session. Read its README for the uv source-build workflow and
-development wheel artifacts; it is not on PyPI.
+Signalsmith for precise duration and pitch work, libpaulstretch for a
+separate spectral stretch/compression effect with approximate output length,
+and Bungee Basic for a separate exact-length `time_scrub` operation that can
+hold or reverse the source playhead. It compiles all four engines into its
+wheels. It has no model weights or inference session. Read its README for the
+uv source-build workflow and development wheel artifacts; it is not on PyPI.
 
 ## Runtime and checkpoint convention
 
