@@ -21,7 +21,8 @@ someone at a repo they can't reach isn't a real recommendation.
 
 | You want to… | Package | Install | Notes |
 |---|---|---|---|
-| Stretch duration, shift pitch, or warp audio to frame markers | `pytimestretch` | uv source install or Actions wheel; follow its README | Public GitHub, not on PyPI. GPL-2.0-or-later; direct Rubber Band/Signalsmith bindings, C++17 toolchain needed for source builds. NumPy frame-major arrays; `duration_ratio` is output/input, the inverse of librosa/pyrubberband `rate`. No inference lifecycle or weights. |
+| Stretch duration, shift pitch, or warp audio to frame markers | `pytimestretch` | uv source install or Actions wheel; follow its README | Public GitHub, not on PyPI. GPL-2.0-only combined distribution; direct Rubber Band/Signalsmith bindings, C++20 toolchain needed for source builds. NumPy frame-major arrays; `duration_ratio` is output/input, the inverse of librosa/pyrubberband `rate`. These operations return exact frame counts. No inference lifecycle or weights. |
+| Make long, smeared spectral textures with extreme time stretching | `pytimestretch.extreme_stretch` | uv source install or Actions wheel; follow its README | Direct libpaulstretch binding, separate from the precise backends. Mono/stereo NumPy audio needs at least 81,920 frames; `duration_ratio >= 1` is passed through unchanged. Output length is approximate and spectral phase changes across calls. Combined distribution is GPL-2.0-only. |
 | Analyze song structure (tempo/BPM, beats, downbeats, segments like verse/chorus) | `all-in-one-infer` | `pip install all-in-one-infer` | Includes built-in source separation (demucs-infer) and beat tracking (madmom-infer); `AllInOneSession` reuses Harmonix plus a lazy session-owned HTDemucs separator for mixed input, while `analyze()` remains the lazy one-shot API and direct stems input never loads Demucs |
 | Beat/downbeat/onset DSP primitives (modernized madmom) | `madmom-infer` | `pip install madmom-infer` | PyPI remains at 0.2.0. Internal deployments use Git tag `v0.3.0`; install `"madmom-infer[numba] @ git+https://github.com/openmirlab/madmom-infer@v0.3.0"` for exact compiled Viterbi, or add `[torch]` for the optional neural frontend. Use `MadmomAnalyzer` for reusable lifecycle; checkpoint metadata is package-owned. |
 | Separate a song into music, vocal/instrumental, cinematic, or drum-kit stems | `demucs-infer` | `pip install demucs-infer` | The general-purpose HTDemucs workhorse plus registry choices for UVR (`vocals`/`non_vocals`), CDX23 (`music`/`sfx`/`speech`), MSST vocals, and DrumSep. `DemucsSession` provides explicit reusable lifecycle and package-owned checkpoint metadata; use the package README for exact model names and weight licenses. |
@@ -47,7 +48,7 @@ someone at a repo they can't reach isn't a real recommendation.
   not a live checkpoint catalog; verify URLs and digests against the package
   at answer time.
 - **License layering**: inspect both package code and any weights.
-  pytimestretch is GPL-2.0-or-later; some model weights carry non-commercial
+  pytimestretch's combined distribution is GPL-2.0-only; some model weights carry non-commercial
   licenses. Check the relevant package's README/NOTICE before recommending
   a use with licensing constraints.
 - **Pipelines compose**: common chains — separate first, then analyze
