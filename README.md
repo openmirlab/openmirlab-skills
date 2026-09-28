@@ -3,7 +3,7 @@
 A [Claude Code](https://claude.com/claude-code) plugin for the
 [openmirlab](https://github.com/openmirlab) music-AI toolbox — source
 separation, song-structure analysis, music transcription, chord
-recognition, audio tagging, and time/pitch processing. The toolbox includes
+recognition, audio tagging, classical MIR/DSP, and time/pitch processing. The toolbox includes
 inference-only model packages and native audio tools.
 
 ## Install
@@ -25,11 +25,14 @@ marked **GitHub** are public but not yet PyPI-published — install straight
 from the repo (`pip install git+https://github.com/openmirlab/<name>`) until
 their release lands. For pytimestretch, follow its [uv installation
 guide](https://github.com/openmirlab/pytimestretch#install), including native
-source-build requirements or the matching Actions wheel.
+source-build requirements or the matching Actions wheel. For pyqmdsp, use its
+[uv installation guide](https://github.com/openmirlab/pyqmdsp#install); source
+checkouts require recursive submodules and C/C++17.
 
 | Task | Package | Status |
 |---|---|---|
 | Time stretching, pitch shifting, forward-only marker warp, Bungee Basic hold/reverse scrubbing, PaulStretch spectral stretch/compression | [pytimestretch](https://github.com/openmirlab/pytimestretch) | GitHub; GPL-2.0-only; source build needs a C++20 toolchain |
+| Classical beat/onset/downbeat, spectral and tonal analysis, segmentation and DSP | [pyqmdsp](https://github.com/openmirlab/pyqmdsp) | GitHub; GPL-2.0-or-later; direct qm-dsp without Vamp; C/C++17 source build or matching Actions wheel |
 | Song structure (BPM, beats, downbeats, segments) | [all-in-one-infer](https://github.com/openmirlab/all-in-one-infer) | PyPI |
 | Beat/downbeat/onset DSP primitives (modernized madmom) | [madmom-infer](https://github.com/openmirlab/madmom-infer) | PyPI |
 | Source separation (vocals/drums/bass/other) | [demucs-infer](https://github.com/openmirlab/demucs-infer) | PyPI |
