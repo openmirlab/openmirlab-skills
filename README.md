@@ -38,7 +38,7 @@ source-build requirements or the matching Actions wheel.
 | Music → MIDI transcription (multi-instrument) | [mt3-infer](https://github.com/openmirlab/mt3-infer) | PyPI |
 | Music → lead sheet | [sheetsage-infer](https://github.com/openmirlab/sheetsage-infer) | PyPI |
 | Chord recognition | [lv-chordia](https://github.com/openmirlab/lv-chordia) | PyPI |
-| Audio tagging/classification | [maest-infer](https://github.com/openmirlab/maest-infer) | PyPI |
+| Genre/subgenre ranking | [maest-infer](https://github.com/openmirlab/maest-infer) | PyPI |
 | Guitar synthesis (DDSP) | [ddsp-guitar-infer](https://github.com/openmirlab/ddsp-guitar-infer) | GitHub |
 | Audio generation (research) | [jukebox-infer](https://github.com/openmirlab/jukebox-infer) | PyPI |
 
