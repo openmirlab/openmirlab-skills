@@ -56,9 +56,10 @@ extensions that stop building, PyPI releases years behind. The inference
 packages are modernized, inference-only, pip-installable rebuilds: no training
 code, no compiled dependencies in the core install, no git-URL
 dependencies, and refactors are held to a bit-identical-output bar against
-the original. Model weights are never bundled — they download at first
-use, and some carry their own (occasionally non-commercial) licenses; the
-capability map flags these.
+the original. Model weights normally download at first use. Explicit package
+exceptions exist: `lv-chordia` includes its approximately 28 MB ensemble for
+offline installation. Check each package README for its acquisition method
+and separate weight license, including non-commercial restrictions.
 
 pytimestretch is a native audio-tool package: it binds Rubber Band and
 Signalsmith for precise duration and pitch work, libpaulstretch for a
@@ -78,4 +79,7 @@ this plugin is a routing aid, not the runtime source of checkpoint truth.
 
 ## License
 
-MIT. Model weights are never bundled by any openmirlab package.
+This skills plugin is MIT-licensed. Each package and its model weights retain
+their own licenses; consult the capability map and the package README.
+Weight distribution follows the download-by-default policy and documented
+package exceptions above.
