@@ -11,6 +11,7 @@ RoFormer inventory was refreshed 2026-07-31, and other package publish status
 remains from the 2026-07-15 README/CLAUDE.md sweep. pytimestretch's public-source
 entry was updated for `time_scrub` on 2026-09-25; it has no PyPI release.
 pyqmdsp was added on 2026-09-28 as a public native DSP package, also without a PyPI release.
+SheetSage's unauthenticated checkpoint URLs were checked on 2026-10-03.
 
 ## Capability map
 
@@ -32,7 +33,7 @@ someone at a repo they can't reach isn't a real recommendation.
 | Separate vocals with SOTA community models | `bs-roformer-infer` / `melband-roformer-infer` | `pip install bs-roformer-infer` · `pip install melband-roformer-infer` | BS covers 16 direct `pcunwa` checkpoints across standard/Xe, Siamese, HyperACE v1/v2, FNO, Large-Inst, Resurrection, Revive, and Value Residual; MelBand covers 20 direct `pcunwa` checkpoints across Big, Small, Instrumental, Kim FT, and InstVoc Duality families. Read each README for exact names and the unresolved weight-license gate. |
 | Separate a mix with an alternative multi-stem / drum-focused model | `mdxnet-infer` | `pip install git+https://github.com/openmirlab/mdxnet-infer` | Public GitHub, not yet on PyPI. MDX23C TFC-TDF registry: DrumSep, vocals/instrumental, dereverb, 4-stem, and SFX recipes. `MDXNetSession` owns explicit lifecycle and package-local checkpoint metadata; see its README for names and license caveats. |
 | Transcribe music to MIDI (multi-instrument) | `mt3-infer` | `pip install mt3-infer` | Wraps 3 independent MT3 ports (MR-MT3/MT3-PyTorch/YourMT3) behind one API — see README for which backend fits |
-| Transcribe to lead sheet (melody + chords) | `sheetsage-infer` | `pip install sheetsage-infer` | `SheetSageSession` provides explicit load/infer/release lifecycle; `sheetsage()` remains the lazy one-shot API |
+| Transcribe to lead sheet (melody + chords) | `sheetsage-infer` | `pip install sheetsage-infer` | `SheetSageSession` provides explicit load/infer/release lifecycle; `sheetsage()` remains the lazy one-shot API. As of 2026-10-03, all seven handcrafted-model S3 URLs return 403 and their Hugging Face fallbacks return 401 without credentials; a fresh installation needs separately available, checksum-verified model files to run inference. See the package README for cache location and current access status. |
 | Recognize chords (large vocabulary) | `lv-chordia` | `pip install lv-chordia` | Bundles its own ~28MB weight ensemble in the wheel (documented size-based exception — no separate download step) |
 | Rank music genre/subgenre labels | `maest-infer` | `pip install maest-infer`; use the repository revision for the additive genre task API | Discogs genre affinities, not mood, energy or instrument measurements. The task API supports whole tracks, explicit start/end segments, and curves; see its README. Scores are independent sigmoid activations, not calibrated probabilities. AGPL-3.0 — check license fit |
 | Synthesize guitar audio from control signals (DDSP) | `ddsp-guitar-infer` | `pip install git+https://github.com/openmirlab/ddsp-guitar-infer` | Public GitHub, not yet on PyPI. String-wise DDSP synth |
