@@ -40,8 +40,11 @@ someone at a repo they can't reach isn't a real recommendation.
 
 ## Ground rules for helping users
 
-- **Weights download at first use** (never bundled): first run needs network +
-  disk; cache locations and model choices live in each repo's README.
+- **Weights normally download at first use:** expect network and cache space
+  unless the package documents a bundled-weight exception. `lv-chordia`
+  includes its approximately 28 MB ensemble for offline installation. Read
+  each package README for acquisition, cache location and weight licensing;
+  avoid blanket claims that every package downloads or bundles weights.
 - **Independent lifecycle:** the inference packages own their model session,
   cache, checkpoint verification, and release; callers may wrap them in a
   higher-level manager without a shared runtime dependency. Read the package
