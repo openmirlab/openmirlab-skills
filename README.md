@@ -37,7 +37,7 @@ checkouts require recursive submodules and C/C++17.
 | Beat/downbeat/onset DSP primitives (modernized madmom) | [madmom-infer](https://github.com/openmirlab/madmom-infer) | PyPI |
 | Source separation (vocals/drums/bass/other) | [demucs-infer](https://github.com/openmirlab/demucs-infer) | PyPI |
 | SOTA vocal separation | [bs-roformer-infer](https://github.com/openmirlab/bs-roformer-infer) · [melband-roformer-infer](https://github.com/openmirlab/melband-roformer-infer) | PyPI |
-| Alternative multi-stem / drum-stem separation | [mdxnet-infer](https://github.com/openmirlab/mdxnet-infer) | GitHub |
+| Alternative multi-stem / drum-stem separation | [mdxnet-infer](https://github.com/openmirlab/mdxnet-infer) | PyPI |
 | Music → MIDI transcription (multi-instrument) | [mt3-infer](https://github.com/openmirlab/mt3-infer) | PyPI |
 | Music → lead sheet | [sheetsage-infer](https://github.com/openmirlab/sheetsage-infer) | PyPI |
 | Chord recognition | [lv-chordia](https://github.com/openmirlab/lv-chordia) | PyPI |
