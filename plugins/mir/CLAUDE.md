@@ -48,8 +48,8 @@ Applications should lock the resolved Git commit; the tested integration baselin
 is `7f90ab3433f3934926b6c5c9eab81206aa9faf6e`. Historical PyPI versions do not
 provide these APIs. The backend remains experimental.
 
-For Phonon integration, read the package's [integration guide](https://github.com/openmirlab/sheetsage-infer/blob/master/docs/phonon-integration.md)
-for remote dependency setup, field mapping and acceptance checks. Prefer
+Read the package's [shared API documentation](https://github.com/openmirlab/sheetsage-infer/blob/master/README.md#shared-transcription-and-song-structure)
+for field mapping, task selection and exports. Prefer
 `SheetSageTranscriber` for interchangeable V1/V2 results and timed song structure.
 The lower-level `SheetSage2Session` returns native ABC/MIDI/annotation dictionaries;
 the legacy `SheetSageSession` returns its original LeadSheet tuple.
