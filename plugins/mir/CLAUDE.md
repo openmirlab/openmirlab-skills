@@ -13,7 +13,7 @@ entry was updated for `time_scrub` on 2026-09-25; it has no PyPI release.
 pyqmdsp was added on 2026-09-28 as a public native DSP package, also without a PyPI release.
 demucs-infer's published/API version split was verified on 2026-10-05.
 SheetSage's unauthenticated checkpoint URLs were checked on 2026-10-03.
-The local SheetSage2 integration was checked on 2026-10-13; verify remote availability before recommending an install.
+SheetSage2 and the shared transcription API were checked on 2026-10-13; the remote Git integration baseline is `7f90ab3433f3934926b6c5c9eab81206aa9faf6e`.
 
 ## Capability map
 
@@ -40,19 +40,19 @@ someone at a repo they can't reach isn't a real recommendation.
 | Synthesize guitar audio from control signals (DDSP) | `ddsp-guitar-infer` | `pip install git+https://github.com/openmirlab/ddsp-guitar-infer.git` | Public GitHub source install. String-wise DDSP synth |
 | Generate audio continuations (research) | `jukebox-infer` | `pip install git+https://github.com/openmirlab/jukebox-infer.git` | `JukeboxSession` provides explicit load/infer/release lifecycle; large checkpoints (~6.2GB) remain lazy and package-owned |
 
-## SheetSage2 experimental checkout
+## Experimental SheetSage2 and shared transcription
 
-For SheetSage2 specifically, check whether the user's checkout contains
-`SheetSage2Session` before recommending it. A checkout with this integration supports `pip install '.[sheetsage2]'` and
-`with SheetSage2Session(device="auto") as session: result = session.infer(path)`.
-The output is a dictionary with ABC, MIDI, separate melody parts and timed
-annotations; the legacy SheetSage1 LeadSheet tuple is a different contract.
-This backend remains experimental. Local integration does not establish that
-the remote default branch or a published release contains it. Refer to the
-checkout README for a full example.
+Install the remote source with the optional backend:
+`pip install "sheetsage-infer[sheetsage2] @ git+https://github.com/openmirlab/sheetsage-infer.git@master"`.
+Applications should lock the resolved Git commit; the tested integration baseline
+is `7f90ab3433f3934926b6c5c9eab81206aa9faf6e`. Historical PyPI versions do not
+provide these APIs. The backend remains experimental.
 
-For a checkout containing `SheetSageTranscriber`, prefer the shared interface
-when users want interchangeable SheetSage1/2 results or timed song structure:
+For Phonon integration, read the package's [integration guide](https://github.com/openmirlab/sheetsage-infer/blob/master/docs/phonon-integration.md)
+for remote dependency setup, field mapping and acceptance checks. Prefer
+`SheetSageTranscriber` for interchangeable V1/V2 results and timed song structure.
+The lower-level `SheetSage2Session` returns native ABC/MIDI/annotation dictionaries;
+the legacy `SheetSageSession` returns its original LeadSheet tuple.
 
 ```python
 from sheetsage import SheetSageTranscriber, SheetSage2Options
@@ -74,7 +74,7 @@ empty list. Shared times are supplied-audio seconds and note pitch is MIDI.
 V2 ABC/LAB/tensors. Shared MIDI exports notes by role plus annotation text;
 upstream accompaniment remains in native MIDI. Structure-only calls export JSON.
 Typed `SheetSage1Options`/`SheetSage2Options` hold backend-specific parameters;
-one-shot `transcribe` creates a fresh session each time. See the checkout README for
+one-shot `transcribe` creates a fresh session each time. See the package README for
 cache/offline settings and input types. Real/quiet fixtures, full natural songs and a 315-second
 music-plus-silence stitching check establish integration parity, not annotated
 transcription or song-structure accuracy.
@@ -86,7 +86,7 @@ The optional extra requires Transformers 4.x because 5.19 fails on upstream
 BART construction. The weights are labeled CC BY-NC 4.0; upstream source
 redistribution terms remain unresolved, so the adapter downloads the upstream
 implementation at runtime. Use the existing SheetSage1 instructions for users
-without this experimental checkout; its old checkpoint availability caveat
+using only the original backend; its old checkpoint availability caveat
 remains applicable to that backend only.
 
 ## Ground rules for helping users
