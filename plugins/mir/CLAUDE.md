@@ -52,6 +52,33 @@ annotations; the legacy SheetSage1 LeadSheet tuple is a different contract.
 This is a local branch experiment, not a PyPI release or a claim that the main
 GitHub branch already provides it. Refer to the branch README for a full example.
 
+For a checkout containing `SheetSageTranscriber`, prefer the shared interface
+when users want interchangeable SheetSage1/2 results or timed song structure:
+
+```python
+from sheetsage import SheetSageTranscriber, SheetSage2Options
+
+options = SheetSage2Options(prompts=("timestamp", "structure"))
+with SheetSageTranscriber("sheetsage2", options=options,
+                         require_structure=True) as model:
+    result = model.infer("song.wav")
+print(result.structure)
+result.to_json("structure.json")
+```
+
+Omit the restricted prompts for melody/chords/beats/keys/meters alongside
+structure. SheetSage1 has no verse/chorus detector: its structure field is None
+with unsupported status; requiring structure raises before model load. Check
+`result.statuses` to distinguish unsupported/not-requested/failed from a valid
+empty list. Shared times are supplied-audio seconds and note pitch is MIDI.
+`result.native` preserves all original capabilities, including V1 LilyPond and
+V2 ABC/LAB/tensors. Shared MIDI exports notes by role plus annotation text;
+upstream accompaniment remains in native MIDI. Structure-only calls export JSON.
+Typed `SheetSage1Options`/`SheetSage2Options` hold backend-specific parameters;
+one-shot `transcribe` creates a fresh session each time. See branch README for
+cache/offline settings and input types. Real/quiet fixtures and a 305-second
+repeated-music stitching smoke do not establish natural-song structure accuracy.
+
 First load fetches about 2.76 GB of weights plus checksum-verified upstream
 code; `cache_dir`/`SHEETSAGE2_CACHE_DIR`, local model/base directories, and
 `local_files_only=True` support controlled/offline use. FFmpeg decodes files.
