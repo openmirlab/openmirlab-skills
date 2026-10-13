@@ -13,6 +13,7 @@ entry was updated for `time_scrub` on 2026-09-25; it has no PyPI release.
 pyqmdsp was added on 2026-09-28 as a public native DSP package, also without a PyPI release.
 demucs-infer's published/API version split was verified on 2026-10-05.
 SheetSage's unauthenticated checkpoint URLs were checked on 2026-10-03.
+The local SheetSage2 integration was checked on 2026-10-13; verify remote availability before recommending an install.
 
 ## Capability map
 
@@ -38,6 +39,55 @@ someone at a repo they can't reach isn't a real recommendation.
 | Rank music genre/subgenre labels | `maest-infer` | `pip install git+https://github.com/openmirlab/maest-infer.git`; use the repository revision for the additive genre task API | Discogs genre affinities, not mood, energy or instrument measurements. The task API supports whole tracks, explicit start/end segments, and curves; see its README. Scores are independent sigmoid activations, not calibrated probabilities. AGPL-3.0 — check license fit |
 | Synthesize guitar audio from control signals (DDSP) | `ddsp-guitar-infer` | `pip install git+https://github.com/openmirlab/ddsp-guitar-infer.git` | Public GitHub source install. String-wise DDSP synth |
 | Generate audio continuations (research) | `jukebox-infer` | `pip install git+https://github.com/openmirlab/jukebox-infer.git` | `JukeboxSession` provides explicit load/infer/release lifecycle; large checkpoints (~6.2GB) remain lazy and package-owned |
+
+## SheetSage2 experimental checkout
+
+For SheetSage2 specifically, check whether the user's checkout contains
+`SheetSage2Session` before recommending it. A checkout with this integration supports `pip install '.[sheetsage2]'` and
+`with SheetSage2Session(device="auto") as session: result = session.infer(path)`.
+The output is a dictionary with ABC, MIDI, separate melody parts and timed
+annotations; the legacy SheetSage1 LeadSheet tuple is a different contract.
+This backend remains experimental. Local integration does not establish that
+the remote default branch or a published release contains it. Refer to the
+checkout README for a full example.
+
+For a checkout containing `SheetSageTranscriber`, prefer the shared interface
+when users want interchangeable SheetSage1/2 results or timed song structure:
+
+```python
+from sheetsage import SheetSageTranscriber, SheetSage2Options
+
+options = SheetSage2Options(prompts=("timestamp", "structure"))
+with SheetSageTranscriber("sheetsage2", options=options,
+                         require_structure=True) as model:
+    result = model.infer("song.wav")
+print(result.structure)
+result.to_json("structure.json")
+```
+
+Omit the restricted prompts for melody/chords/beats/keys/meters alongside
+structure. SheetSage1 has no verse/chorus detector: its structure field is None
+with unsupported status; requiring structure raises before model load. Check
+`result.statuses` to distinguish unsupported/not-requested/failed from a valid
+empty list. Shared times are supplied-audio seconds and note pitch is MIDI.
+`result.native` preserves all original capabilities, including V1 LilyPond and
+V2 ABC/LAB/tensors. Shared MIDI exports notes by role plus annotation text;
+upstream accompaniment remains in native MIDI. Structure-only calls export JSON.
+Typed `SheetSage1Options`/`SheetSage2Options` hold backend-specific parameters;
+one-shot `transcribe` creates a fresh session each time. See the checkout README for
+cache/offline settings and input types. Real/quiet fixtures, full natural songs and a 315-second
+music-plus-silence stitching check establish integration parity, not annotated
+transcription or song-structure accuracy.
+
+First load fetches about 2.76 GB of weights plus checksum-verified upstream
+code; `cache_dir`/`SHEETSAGE2_CACHE_DIR`, local model/base directories, and
+`local_files_only=True` support controlled/offline use. FFmpeg decodes files.
+The optional extra requires Transformers 4.x because 5.19 fails on upstream
+BART construction. The weights are labeled CC BY-NC 4.0; upstream source
+redistribution terms remain unresolved, so the adapter downloads the upstream
+implementation at runtime. Use the existing SheetSage1 instructions for users
+without this experimental checkout; its old checkpoint availability caveat
+remains applicable to that backend only.
 
 ## Ground rules for helping users
 
