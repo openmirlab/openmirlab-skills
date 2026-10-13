@@ -40,13 +40,13 @@ someone at a repo they can't reach isn't a real recommendation.
 | Synthesize guitar audio from control signals (DDSP) | `ddsp-guitar-infer` | `pip install git+https://github.com/openmirlab/ddsp-guitar-infer.git` | Public GitHub source install. String-wise DDSP synth |
 | Generate audio continuations (research) | `jukebox-infer` | `pip install git+https://github.com/openmirlab/jukebox-infer.git` | `JukeboxSession` provides explicit load/infer/release lifecycle; large checkpoints (~6.2GB) remain lazy and package-owned |
 
-## Experimental SheetSage2 and shared transcription
+## SheetSage2 and shared transcription
 
-Install the remote source with the optional backend:
-`pip install "sheetsage-infer[sheetsage2] @ git+https://github.com/openmirlab/sheetsage-infer.git@master"`.
-Applications should lock the resolved Git commit; the tested integration baseline
-is `7f90ab3433f3934926b6c5c9eab81206aa9faf6e`. Historical PyPI versions do not
-provide these APIs. The backend remains experimental.
+Install the remote source; both backends are included by default:
+`pip install "sheetsage-infer @ git+https://github.com/openmirlab/sheetsage-infer.git@master"`.
+Applications should lock the resolved Git commit. Historical PyPI versions do
+not provide these APIs. The former `[sheetsage2]` extra is a compatibility alias;
+model imports and loading remain lazy.
 
 Read the package's [shared API documentation](https://github.com/openmirlab/sheetsage-infer/blob/master/README.md#shared-transcription-and-song-structure)
 for field mapping, task selection and exports. Prefer
@@ -82,7 +82,7 @@ transcription or song-structure accuracy.
 First load fetches about 2.76 GB of weights plus checksum-verified upstream
 code; `cache_dir`/`SHEETSAGE2_CACHE_DIR`, local model/base directories, and
 `local_files_only=True` support controlled/offline use. FFmpeg decodes files.
-The optional extra requires Transformers 4.x because 5.19 fails on upstream
+V2 requires Transformers 4.x because 5.19 fails on upstream
 BART construction. The weights are labeled CC BY-NC 4.0; upstream source
 redistribution terms remain unresolved, so the adapter downloads the upstream
 implementation at runtime. Use the existing SheetSage1 instructions for users
