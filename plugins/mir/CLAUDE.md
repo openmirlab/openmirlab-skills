@@ -13,7 +13,7 @@ entry was updated for `time_scrub` on 2026-09-25; it has no PyPI release.
 pyqmdsp was added on 2026-09-28 as a public native DSP package, also without a PyPI release.
 demucs-infer's published/API version split was verified on 2026-10-05.
 SheetSage's unauthenticated checkpoint URLs were checked on 2026-10-03.
-The local `experiment/sheetsage2` integration was checked on 2026-10-13; it is not published.
+The local SheetSage2 integration was checked on 2026-10-13; verify remote availability before recommending an install.
 
 ## Capability map
 
@@ -44,13 +44,13 @@ someone at a repo they can't reach isn't a real recommendation.
 ## SheetSage2 experimental checkout
 
 For SheetSage2 specifically, check whether the user's checkout contains
-`SheetSage2Session` before recommending it. The `experiment/sheetsage2` branch
-adds `pip install '.[sheetsage2]'` and
+`SheetSage2Session` before recommending it. A checkout with this integration supports `pip install '.[sheetsage2]'` and
 `with SheetSage2Session(device="auto") as session: result = session.infer(path)`.
 The output is a dictionary with ABC, MIDI, separate melody parts and timed
 annotations; the legacy SheetSage1 LeadSheet tuple is a different contract.
-This is a local branch experiment, not a PyPI release or a claim that the main
-GitHub branch already provides it. Refer to the branch README for a full example.
+This backend remains experimental. Local integration does not establish that
+the remote default branch or a published release contains it. Refer to the
+checkout README for a full example.
 
 For a checkout containing `SheetSageTranscriber`, prefer the shared interface
 when users want interchangeable SheetSage1/2 results or timed song structure:
@@ -75,9 +75,10 @@ empty list. Shared times are supplied-audio seconds and note pitch is MIDI.
 V2 ABC/LAB/tensors. Shared MIDI exports notes by role plus annotation text;
 upstream accompaniment remains in native MIDI. Structure-only calls export JSON.
 Typed `SheetSage1Options`/`SheetSage2Options` hold backend-specific parameters;
-one-shot `transcribe` creates a fresh session each time. See branch README for
-cache/offline settings and input types. Real/quiet fixtures and a 305-second
-repeated-music stitching smoke do not establish natural-song structure accuracy.
+one-shot `transcribe` creates a fresh session each time. See the checkout README for
+cache/offline settings and input types. Real/quiet fixtures, full natural songs and a 315-second
+music-plus-silence stitching check establish integration parity, not annotated
+transcription or song-structure accuracy.
 
 First load fetches about 2.76 GB of weights plus checksum-verified upstream
 code; `cache_dir`/`SHEETSAGE2_CACHE_DIR`, local model/base directories, and
