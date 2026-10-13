@@ -13,6 +13,7 @@ entry was updated for `time_scrub` on 2026-09-25; it has no PyPI release.
 pyqmdsp was added on 2026-09-28 as a public native DSP package, also without a PyPI release.
 demucs-infer's published/API version split was verified on 2026-10-05.
 SheetSage's unauthenticated checkpoint URLs were checked on 2026-10-03.
+The local `experiment/sheetsage2` integration was checked on 2026-10-13; it is not published.
 
 ## Capability map
 
@@ -34,11 +35,32 @@ someone at a repo they can't reach isn't a real recommendation.
 | Separate vocals with SOTA community models | `bs-roformer-infer` / `melband-roformer-infer` | `pip install bs-roformer-infer` · `pip install melband-roformer-infer` | BS covers 16 direct `pcunwa` checkpoints across standard/Xe, Siamese, HyperACE v1/v2, FNO, Large-Inst, Resurrection, Revive, and Value Residual; MelBand covers 20 direct `pcunwa` checkpoints across Big, Small, Instrumental, Kim FT, and InstVoc Duality families. Read each README for exact names and the unresolved weight-license gate. |
 | Separate a mix with an alternative multi-stem / drum-focused model | `mdxnet-infer` | `pip install git+https://github.com/openmirlab/mdxnet-infer` | Public GitHub, not yet on PyPI. MDX23C TFC-TDF registry: DrumSep, vocals/instrumental, dereverb, 4-stem, and SFX recipes. `MDXNetSession` owns explicit lifecycle and package-local checkpoint metadata; see its README for names and license caveats. |
 | Transcribe music to MIDI (multi-instrument) | `mt3-infer` | `pip install mt3-infer` | Wraps 3 independent MT3 ports (MR-MT3/MT3-PyTorch/YourMT3) behind one API — see README for which backend fits |
-| Transcribe to lead sheet (melody + chords) | `sheetsage-infer` | `pip install sheetsage-infer` | `SheetSageSession` provides explicit load/infer/release lifecycle; `sheetsage()` remains the lazy one-shot API. As of 2026-10-03, all seven handcrafted-model S3 URLs return 403 and their Hugging Face fallbacks return 401 without credentials; a fresh installation needs separately available, checksum-verified model files to run inference. See the package README for cache location and current access status. |
+| Transcribe to lead sheet (melody + chords) | `sheetsage-infer` | Install from its GitHub source; see README | `SheetSageSession` provides explicit load/infer/release lifecycle; `sheetsage()` remains the lazy one-shot API. As of 2026-10-03, all seven handcrafted-model S3 URLs return 403 and their Hugging Face fallbacks return 401 without credentials; a fresh installation needs separately available, checksum-verified model files to run inference. See the package README for cache location and current access status. |
 | Recognize chords (large vocabulary) | `lv-chordia` | `pip install lv-chordia` | Bundles its own ~28MB weight ensemble in the wheel (documented size-based exception — no separate download step) |
 | Rank music genre/subgenre labels | `maest-infer` | `pip install maest-infer`; use the repository revision for the additive genre task API | Discogs genre affinities, not mood, energy or instrument measurements. The task API supports whole tracks, explicit start/end segments, and curves; see its README. Scores are independent sigmoid activations, not calibrated probabilities. AGPL-3.0 — check license fit |
 | Synthesize guitar audio from control signals (DDSP) | `ddsp-guitar-infer` | `pip install git+https://github.com/openmirlab/ddsp-guitar-infer` | Public GitHub, not yet on PyPI. String-wise DDSP synth |
 | Generate audio continuations (research) | `jukebox-infer` | `pip install jukebox-infer` | `JukeboxSession` provides explicit load/infer/release lifecycle; large checkpoints (~6.2GB) remain lazy and package-owned |
+
+## SheetSage2 experimental checkout
+
+For SheetSage2 specifically, check whether the user's checkout contains
+`SheetSage2Session` before recommending it. The `experiment/sheetsage2` branch
+adds `pip install '.[sheetsage2]'` and
+`with SheetSage2Session(device="auto") as session: result = session.infer(path)`.
+The output is a dictionary with ABC, MIDI, separate melody parts and timed
+annotations; the legacy SheetSage1 LeadSheet tuple is a different contract.
+This is a local branch experiment, not a PyPI release or a claim that the main
+GitHub branch already provides it. Refer to the branch README for a full example.
+
+First load fetches about 2.76 GB of weights plus checksum-verified upstream
+code; `cache_dir`/`SHEETSAGE2_CACHE_DIR`, local model/base directories, and
+`local_files_only=True` support controlled/offline use. FFmpeg decodes files.
+The optional extra requires Transformers 4.x because 5.19 fails on upstream
+BART construction. The weights are labeled CC BY-NC 4.0; upstream source
+redistribution terms remain unresolved, so the adapter downloads the upstream
+implementation at runtime. Use the existing SheetSage1 instructions for users
+without this experimental checkout; its old checkpoint availability caveat
+remains applicable to that backend only.
 
 ## Ground rules for helping users
 
