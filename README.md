@@ -60,8 +60,9 @@ and separate weight license, including non-commercial restrictions.
 pytimestretch is a native audio-tool package: it binds Rubber Band and
 Signalsmith for precise duration and pitch work, libpaulstretch for a
 separate spectral stretch/compression effect with approximate output length,
-and Bungee Basic for a separate exact-length `time_scrub` operation that can
-hold or reverse the source playhead. It compiles all four engines into its
+and Bungee Basic for the default marker-aligned `time_warp` and a separate
+exact-length `time_scrub` operation that can hold or reverse the source playhead.
+It compiles all four engines into its
 wheels. It has no model weights or inference session. Read its README for the
 uv source-build workflow and development wheel artifacts; it is not on PyPI.
 
