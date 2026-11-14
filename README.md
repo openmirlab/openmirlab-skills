@@ -71,6 +71,7 @@ checkouts require recursive submodules and C/C++17.
 | SOTA vocal separation | [bs-roformer-infer](https://github.com/openmirlab/bs-roformer-infer) · [melband-roformer-infer](https://github.com/openmirlab/melband-roformer-infer) | GitHub |
 | Alternative multi-stem / drum-stem separation | [mdxnet-infer](https://github.com/openmirlab/mdxnet-infer) | GitHub |
 | AudioSet tagging and native clip embeddings | [efficientat-infer](https://github.com/openmirlab/efficientat-infer) · [panns-infer](https://github.com/openmirlab/panns-infer) | GitHub; mn04/mn10 or CNN14; compare accuracy on your own sounds |
+| Fine-grained music/text retrieval | [figma-infer](https://github.com/openmirlab/figma-infer) | GitHub source; 10-second 24 kHz windows; checkpoint CC BY-NC 4.0, no PyPI release |
 | Music → MIDI transcription (multi-instrument) | [mt3-infer](https://github.com/openmirlab/mt3-infer) | GitHub |
 | Music → lead sheet | [sheetsage-infer](https://github.com/openmirlab/sheetsage-infer) | GitHub |
 | Chord recognition | [lv-chordia](https://github.com/openmirlab/lv-chordia) | GitHub |
@@ -87,7 +88,7 @@ libraries, evaluation frameworks, and more as the list grows).
 Upstream MIR research code goes stale fast — abandoned repos, compiled
 extensions that stop building, PyPI releases years behind. The inference
 packages are modernized, inference-only, pip-installable rebuilds: no training
-code, no compiled dependencies in the core install, pinned Git dependencies for maintained sibling packages, and refactors are held to a bit-identical-output bar against
+code, no compiled dependencies in the core install, and refactors are held to a bit-identical-output bar against
 the original. Model weights normally download at first use. Explicit package
 exceptions exist: `lv-chordia` includes its approximately 28 MB ensemble for
 offline installation. Check each package README for its acquisition method
